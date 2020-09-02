@@ -1,9 +1,6 @@
 from flask import jsonify
 from flask import request
 from flask import Blueprint, render_template
-
-classifier_inceptionV3 = Blueprint("classifier_inceptionV3", __name__)
-
 from PIL import Image
 from keras.applications.inception_v3 import preprocess_input
 from keras.applications.imagenet_utils import decode_predictions
@@ -14,14 +11,15 @@ from io import BytesIO
 import requests
 
 
+classifier = Blueprint("classifier", __name__)
 
 
-@classifier_inceptionV3.route("/", methods=['GET', 'POST'])
+@classifier.route("/", methods=['GET', 'POST'])
 def home():
     return jsonify("Working")
 
 
-@classifier_inceptionV3.route("/clean", methods=['GET', 'POST'])
+@classifier.route("/clean", methods=['GET', 'POST'])
 def clean():
     print("\n\nclean\n\n")
     global model
@@ -32,7 +30,7 @@ def clean():
     return jsonify("Done")
 
 
-@classifier_inceptionV3.route("/classify_image", methods=['POST'])
+@classifier.route("/classify_image", methods=['POST'])
 def classify_image():
     """
         Receives an image. Form-data
@@ -46,7 +44,7 @@ def classify_image():
     return classify(image)
 
 
-@classifier_inceptionV3.route("/classify_url", methods=['POST'])
+@classifier.route("/classify_url", methods=['POST'])
 def classify_url():
     """
         Receives a URL. Json

@@ -1,14 +1,14 @@
 from flask import Flask
 from flask import jsonify
 from flask import request
-from inceptionV3 import classifier_inceptionV3
+from app_classifier import classifier
 
 import os
 import psutil
 
 
 app = Flask(__name__)
-app.register_blueprint(classifier_inceptionV3, url_prefix="/classifier_inceptionV3")
+app.register_blueprint(classifier, url_prefix="/classifier")
 
 
 print("\n\n\n\n")
@@ -21,7 +21,7 @@ def home():
     return jsonify("Working")
 
 
-@app.route("/info", methods=['GET', 'POST'])
+@app.route("/memory_usage", methods=['GET', 'POST'])
 def info():
 
     process = psutil.Process(os.getpid())
