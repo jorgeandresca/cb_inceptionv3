@@ -11,7 +11,7 @@ import tensorflow
 
 
 # model = InceptionV3()  # InceptionV3 Input (None, 299,299,3 / print(model.input_shape)
-model = load_model('inceptionV3_model.h5')  # Input (None, 299,299,3 / print(model.input_shape)
+model = load_model('model.h5')  # Input (None, 299,299,3 / print(model.input_shape)
 
 # Open file
 image = Image.open('data/test/hare.jpg')
